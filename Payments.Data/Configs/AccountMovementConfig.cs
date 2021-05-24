@@ -14,8 +14,13 @@ namespace Payments.Data.Configs
             builder.Property(p => p.CreateDate).IsRequired();
             builder.Property(p => p.EditDate).IsRequired(false);
             builder.Property(p => p.DeleteDate).IsRequired(false);
+
+            builder.HasOne(x => x.Account)
+                .WithMany(x => x.Movements)
+                .HasForeignKey(x => x.AccountId)
+                .OnDelete(DeleteBehavior.Cascade);
             
-            builder.HasOne(ho => ho.Account);
+            builder.Ignore(i => i.CascadeMode);
         }
     }
 

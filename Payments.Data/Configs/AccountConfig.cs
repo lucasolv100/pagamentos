@@ -15,6 +15,8 @@ namespace Payments.Data.Configs
             builder.Property(p => p.EditDate).IsRequired(false);
             builder.Property(p => p.DeleteDate).IsRequired(false);
             builder.Property(p => p.IsLegalPerson).IsRequired();
+
+            builder.Ignore(i => i.CascadeMode);
         }
     }
 

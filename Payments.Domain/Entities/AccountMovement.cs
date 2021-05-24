@@ -17,8 +17,8 @@ namespace Payments.Domain.Entities
         }
 
         public decimal Value { get; private set; }
-        public int AccountId { get; private set; }
         public MovementTypeEnum MovementType { get; private set; }
+        public int AccountId { get; private set; }
         public Account Account { get; private set; }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FluentValidation;
 
 namespace Payments.Domain.Entities
@@ -35,6 +36,7 @@ namespace Payments.Domain.Entities
         public string Name { get; private set; }
         public string Document { get; private set; }
         public bool IsLegalPerson { get; private set; }
+        public IEnumerable<AccountMovement> Movements { get; private set; }
 
         bool IsCpf(string cpf)
         {

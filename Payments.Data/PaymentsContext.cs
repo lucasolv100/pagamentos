@@ -18,6 +18,7 @@ namespace Payments.Data
 		{
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.ApplyConfiguration(new AccountConfig());
+			modelBuilder.ApplyConfiguration(new AccountMovementConfig());
 		}
         
     }

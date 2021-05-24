@@ -10,7 +10,7 @@ using Payments.Data;
 namespace Payments.Data.Migrations
 {
     [DbContext(typeof(PaymentsContext))]
-    [Migration("20210524160623_inicial")]
+    [Migration("20210524183258_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,7 +78,7 @@ namespace Payments.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
@@ -90,12 +90,17 @@ namespace Payments.Data.Migrations
             modelBuilder.Entity("Payments.Domain.Entities.AccountMovement", b =>
                 {
                     b.HasOne("Payments.Domain.Entities.Account", "Account")
-                        .WithMany()
+                        .WithMany("Movements")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("Payments.Domain.Entities.Account", b =>
+                {
+                    b.Navigation("Movements");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,6 +18,7 @@ namespace Payments.API.Bootstrap
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IWorker<RegisterAccountVM>, AccountWorker>();
+            services.AddScoped<IWorker<RegisterOperationVM>, AccountMovementWorker>();
             
         }
     }
