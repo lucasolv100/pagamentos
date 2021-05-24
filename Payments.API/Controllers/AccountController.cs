@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Payments.Domain.Interfaces;
+using Payments.Domain.ViewModels;
 
 namespace Payments.API.Controllers
 {
@@ -13,16 +15,28 @@ namespace Payments.API.Controllers
     {
 
         private readonly ILogger<AccountController> _logger;
+        private readonly IWorker<RegisterAccountVM> _worker;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(
+            ILogger<AccountController> logger,
+            IWorker<RegisterAccountVM> worker
+        )
         {
             _logger = logger;
+            _worker = worker;
         }
 
         [HttpGet]
-        public IActionResult CreateAccount()
+        public async Task<IActionResult> CreateAccount(RegisterAccountVM model)
         {
-            return Ok();
+            var resp = await _worker.Add(model);
+            
+            if (!resp.Success)
+            {
+                return BadRequest(resp);
+            }
+
+            return NoContent();
         }
     }
 }

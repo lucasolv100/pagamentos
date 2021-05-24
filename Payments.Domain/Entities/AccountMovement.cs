@@ -2,7 +2,7 @@ using Payments.Domain.Enums;
 
 namespace Payments.Domain.Entities
 {
-    public class AccountMovement : Base
+    public class AccountMovement : Base<AccountMovement>
     {
         public AccountMovement(decimal value, int accountId, MovementTypeEnum movementType)
         {
