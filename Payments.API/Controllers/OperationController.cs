@@ -10,20 +10,20 @@ using Payments.Domain.ViewModels;
 namespace Payments.API.Controllers
 {
     [ApiController]
-    [Route("api/v1/account")]
-    public class AccountController : ControllerBase
+    [Route("api/v1/operation")]
+    public class OperationController : ControllerBase
     {
-         private readonly IWorker<RegisterAccountVM> _worker;
+         private readonly IWorker<RegisterOperationVM> _worker;
 
-        public AccountController(
-            IWorker<RegisterAccountVM> worker
+        public OperationController(
+            IWorker<RegisterOperationVM> worker
         )
         {
             _worker = worker;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAccount(RegisterAccountVM model)
+        public async Task<IActionResult> CreateOperation(RegisterOperationVM model)
         {
             var resp = await _worker.Add(model);
             

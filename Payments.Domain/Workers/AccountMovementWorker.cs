@@ -7,21 +7,21 @@ using Payments.Domain.ViewModels;
 
 namespace Payments.Domain.Workers
 {
-    public class AccountWorker : IWorker<RegisterAccountVM>
+    public class AccountMovementWorker : IWorker<RegisterOperationVM>
     {
-        private readonly IRepository<Account> _repository;
+        private readonly IRepository<AccountMovement> _repository;
 
-        public AccountWorker(IRepository<Account> repository)
+        public AccountMovementWorker(IRepository<AccountMovement> repository)
         {
             _repository = repository;
         }
-        public async Task<APIResponseDTO> Add(RegisterAccountVM model)
+        public async Task<APIResponseDTO> Add(RegisterOperationVM model)
         {
             try
             {
-                var account = new Account(model.Name, model.Document, model.IsLegalPerson);
+                var accountMovement = new AccountMovement(model.Value, model.AccountId, model.Type);
 
-                var validations = await account.ValidateAsync(account);
+                var validations = await accountMovement.ValidateAsync(accountMovement);
 
                 if (!validations.IsValid)
                 {
@@ -31,7 +31,7 @@ namespace Payments.Domain.Workers
                     };
                 }
 
-                await _repository.AddAsync(account);
+                await _repository.AddAsync(accountMovement);
 
                 return new APIResponseDTO();
             }
@@ -41,6 +41,7 @@ namespace Payments.Domain.Workers
                 throw;
             }
 
+
         }
 
         public async Task<APIResponseDTO> Delete(int id)
@@ -48,7 +49,7 @@ namespace Payments.Domain.Workers
             throw new System.NotImplementedException();
         }
 
-        public async Task<APIResponseDTO> Update(int id, RegisterAccountVM model)
+        public async Task<APIResponseDTO> Update(int id, RegisterOperationVM model)
         {
             throw new System.NotImplementedException();
         }

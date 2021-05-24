@@ -13,5 +13,6 @@ namespace Payments.Domain.Interfaces
 		 Task<IEnumerable<T>> GetAllAsync();
 		 Task<T> GetAsync(int id);
 		 Task<T> GetByExpressionAsync(Expression<Func<T, bool>> exp);
+		 Task<IEnumerable<T>> GetAllExpressionAsync(Expression<Func<T, bool>> exp);
     }
 }
