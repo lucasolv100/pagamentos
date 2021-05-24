@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Payments.API.Mappers;
 using Payments.Data;
 using Payments.Data.Repositories;
 using Payments.Domain.Entities;
@@ -19,6 +20,7 @@ namespace Payments.API.Bootstrap
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IWorker<RegisterAccountVM>, AccountWorker>();
             services.AddScoped<IWorker<RegisterOperationVM>, AccountMovementWorker>();
+            services.AddScoped<AccountMapper>();
             
         }
     }

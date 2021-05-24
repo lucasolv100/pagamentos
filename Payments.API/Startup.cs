@@ -52,7 +52,7 @@ namespace Payments.API
 
             InitializeDatabase(app);
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseCors(opt => opt.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().SetIsOriginAllowed(e => true)); //Habilita CORS para qualquer dominio.
 

@@ -17,13 +17,13 @@ namespace Payments.Domain.Entities
             RuleFor(x => x.Document).NotEmpty().WithMessage("O documento deve ser preenchido");
             RuleFor(x => x.Name).Length(3, 50).WithMessage("O nome deve conter de 3 a 50 caracteres");
 
-            if (Document.Length == 11)
+            if (Document.Length > 11 && Document.Length < 15)
             {
-                RuleFor(x => x.Document).Must(x => IsCpf(Document)).WithMessage("O nome cpf não parece válido");
+                RuleFor(x => x.Document).Must(x => IsCpf(Document)).WithMessage("O cpf não parece válido");
             }
-            if (Document.Length == 14)
+            else
             {
-                RuleFor(x => x.Document).Must(x => IsCnpj(Document)).WithMessage("O nome cnpj não parece válido");
+                RuleFor(x => x.Document).Must(x => IsCnpj(Document)).WithMessage("O cnpj não parece válido");
             }
         }
 
