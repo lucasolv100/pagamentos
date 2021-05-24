@@ -28,8 +28,8 @@ namespace Payments.API.Controllers
         {
             try
             {
-                var creditList = await _repository.GetAllExpressionAsync(w => w.MovementType == Domain.Enums.MovementTypeEnum.Credit);
-                var debitList = await _repository.GetAllExpressionAsync(w => w.MovementType == Domain.Enums.MovementTypeEnum.Debit);
+                var creditList = await _repository.GetAllExpressionAsync(w => w.MovementType == Domain.Enums.MovementTypeEnum.Credit && w.DeleteDate == null);
+                var debitList = await _repository.GetAllExpressionAsync(w => w.MovementType == Domain.Enums.MovementTypeEnum.Debit && w.DeleteDate == null);
 
                 BalanceVM balance = new()
                 {

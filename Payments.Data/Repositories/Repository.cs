@@ -31,10 +31,7 @@ namespace Payments.Data.Repositories
 
         public async Task<IEnumerable<T>> GetAllExpressionAsync(Expression<Func<T, bool>> exp)
         {
-            Expression<Func<T, bool>> where = w => w.DeleteDate == null;
-            var newExp = Expression.AndAlso(where, exp);
-            var lambda = Expression.Lambda<Func<T,bool>>(newExp);
-            return await _context.Set<T>().Where(lambda).ToListAsync();
+            return await _context.Set<T>().Where(exp).ToListAsync();
         }
 
         public async Task<T> GetAsync(int id)
